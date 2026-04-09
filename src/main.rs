@@ -15,21 +15,71 @@ fn main() {
     print_matrix(&matrix);
     let matrix = define_values(matrix);
     print_matrix(&matrix);
+
+    let matrix = row_echelon(matrix);
+    print_matrix(&matrix);
      
 }
 
-fn create_matrix(dimension: String) -> Vec<Vec<i32>> {
+fn row_echelon(mut matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
+  let row_count = matrix.len();
+  let col_count = matrix[0].len();
+
+  let mut pivot_row = 0;
+
+  for pivot_col in 0..col_count {
+    if pivot_row >= row_count {
+      break;
+    }
+
+    // finding pivot
+    let mut max_row = pivot_row;
+    while max_row < row_count && matrix[max_row][pivot_col] == 0.0 {
+      max_row += 1;
+    }
+
+    if max_row == row_count {
+      continue;
+    }
+
+    // swap rows
+    if max_row != pivot_row {
+      matrix.swap(pivot_row, max_row);
+    }
+
+    // make pivot = 1
+    let pivot = matrix[pivot_row][pivot_col];
+    for col in pivot_col..col_count {
+      matrix[pivot_row][col] /= pivot;
+    }
+
+    // eliminate below
+    for row in pivot_row + 1..row_count {
+      let factor = matrix[row][pivot_col];
+
+      for col in pivot_col..col_count {
+        matrix[row][col] -= factor * matrix[pivot_row][col];
+      }
+    }
+
+    pivot_row += 1;
+  }
+
+  return matrix;
+}
+
+fn create_matrix(dimension: String) -> Vec<Vec<f64>> {
     let n: usize = dimension
         .trim()
         .parse()
         .expect("number");
 
-    let matrix = vec![vec![0; n]; n];
+    let matrix = vec![vec![0.0; n]; n];
 
     return matrix;
 }
 
-fn define_values(mut matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
+fn define_values(mut matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
 
     let mut row_counter = 0;
     for row in 0..matrix.len() {
@@ -41,9 +91,9 @@ fn define_values(mut matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
                 .read_line(&mut input)
                 .expect("Invalid values");
 
-            let values: Vec<i32> = input
+            let values: Vec<f64> = input
                 .split_whitespace()
-                .map(|x| x.parse::<i32>().expect("Enter a valid input"))
+                .map(|x| x.parse::<f64>().expect("Enter a valid input"))
                 .collect();
 
             if values.len() != matrix[row].len() {
@@ -62,7 +112,7 @@ fn define_values(mut matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
     return matrix;
 }
 
-fn print_matrix(matrix: &Vec<Vec<i32>>){
+fn print_matrix(matrix: &Vec<Vec<f64>>){
     for row in matrix {
         println!("{:?}", row);
     }
