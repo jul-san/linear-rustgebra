@@ -1,8 +1,10 @@
-use std::io;
+use std::io::{self, Write};
 
 fn main() {
 
-    println!("Enter the dimension (n) of your matrix: ");
+    print!("Enter the dimension (n) of your matrix: ");
+    io::stdout().flush().unwrap();
+
     let mut dimension = String::new(); 
     io::stdin()
         .read_line(&mut dimension)
@@ -52,6 +54,7 @@ fn define_values(mut matrix: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         
             matrix[row] = values;
             row_counter += 1;
+            println!("");
             break;
         }
     }
@@ -63,4 +66,5 @@ fn print_matrix(matrix: &Vec<Vec<i32>>){
     for row in matrix {
         println!("{:?}", row);
     }
+    println!("");
 }
