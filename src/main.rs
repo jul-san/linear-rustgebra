@@ -12,13 +12,6 @@ fn main() {
 
     let matrix = create_matrix(dimension);
 
-    print_matrix(&matrix);
-    let matrix = define_values(matrix);
-    print_matrix(&matrix);
-
-    let matrix = row_echelon(matrix);
-    print_matrix(&matrix);
-     
 }
 
 fn row_echelon(mut matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
@@ -68,17 +61,6 @@ fn row_echelon(mut matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
   return matrix;
 }
 
-fn create_matrix(dimension: String) -> Vec<Vec<f64>> {
-    let n: usize = dimension
-        .trim()
-        .parse()
-        .expect("number");
-
-    let matrix = vec![vec![0.0; n]; n];
-
-    return matrix;
-}
-
 fn define_values(mut matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
 
     let mut row_counter = 0;
@@ -110,11 +92,4 @@ fn define_values(mut matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
     }
 
     return matrix;
-}
-
-fn print_matrix(matrix: &Vec<Vec<f64>>){
-    for row in matrix {
-        println!("{:?}", row);
-    }
-    println!("");
 }
