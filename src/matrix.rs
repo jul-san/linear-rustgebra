@@ -3,8 +3,10 @@ pub struct Matrix{
 }
 
 impl Matrix{
-    pub fn init_matrix(&mut self, input: Vec<Vec<f64>>){
-        self.matrix = input;
+    pub fn new(input: Vec<Vec<f64>>) -> Matrix{
+        Matrix {
+            matrix: input,
+        }
     }
 
     pub fn print_matrix(&self){
