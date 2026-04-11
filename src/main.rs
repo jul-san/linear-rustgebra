@@ -1,19 +1,17 @@
-use std::io::{self, Write};
+mod matrix;
+
+use std::io::{self};
+use matrix::Matrix;
 
 fn main() {
+    let m = Matrix::new(vec![
+        vec![1.0, 0.0], 
+        vec![0.0, 1.0]]);
 
-    print!("Enter the dimension (n) of your matrix: ");
-    io::stdout().flush().unwrap();
-
-    let mut dimension = String::new(); 
-    io::stdin()
-        .read_line(&mut dimension)
-        .expect("Could not read input");
-
-    let matrix = create_matrix(dimension);
-
+    m.print_matrix();
 }
 
+/*
 fn row_echelon(mut matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
   let row_count = matrix.len();
   let col_count = matrix[0].len();
@@ -93,3 +91,4 @@ fn define_values(mut matrix: Vec<Vec<f64>>) -> Vec<Vec<f64>> {
 
     return matrix;
 }
+*/
