@@ -1,12 +1,19 @@
 mod matrix;
+mod operations;
 
 use std::io::{self};
 use matrix::Matrix;
+use operations::row_ops;
 
 fn main() {
-    let m = Matrix::new(vec![
-        vec![1.0, 0.0], 
-        vec![0.0, 1.0]]);
+    let mut m = Matrix::new(vec![
+        vec![1.0, 2.0, 3.0], 
+        vec![4.0, 5.0, 6.0],
+        vec![7.0, 8.0, 9.0]]);
+
+    m.print_matrix();
+
+    row_ops::swap_row(&mut m, 0, 2);
 
     m.print_matrix();
 }
