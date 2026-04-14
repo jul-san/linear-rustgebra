@@ -29,4 +29,12 @@ impl Matrix{
     pub fn mut_matrix(&mut self) -> &mut Vec<f64> {
         return &mut self.matrix;
     }
+
+    pub fn get_rows(&self) -> &usize {
+        return &self.rows;
+    }
+
+    pub fn get_cols(&self) -> &usize {
+        return &self.cols;
+    }
 }
