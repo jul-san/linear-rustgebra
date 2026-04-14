@@ -1,25 +1,32 @@
 pub struct Matrix{
-    matrix: Vec<Vec<f64>>
+    rows: usize,
+    cols: usize,
+    matrix: Vec<f64>
 }
 
 impl Matrix{
-    pub fn new(input: Vec<Vec<f64>>) -> Matrix{
+    pub fn new(r: usize, c: usize, input: Vec<f64>) -> Matrix{
         Matrix {
+            rows: r,
+            cols: c,
             matrix: input,
         }
     }
 
     pub fn print_matrix(&self){
-        for row in &self.matrix{
-            println!("{:?}", row);
+        for row in 0..self.rows{
+            for col in 0..self.cols{
+                print!("{} ", self.matrix[row * self.cols + col]);
+            }
+            println!();
         }
     }
 
-    pub fn read_matrix(&self) -> &Vec<Vec<f64>> {
+    pub fn read_matrix(&self) -> &Vec<f64> {
         return &self.matrix;
     }
 
-    pub fn mut_matrix(&mut self) -> &mut Vec<Vec<f64>> {
+    pub fn mut_matrix(&mut self) -> &mut Vec<f64> {
         return &mut self.matrix;
     }
 }
