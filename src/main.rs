@@ -16,6 +16,13 @@ fn main() {
     print_section("Printing M2");
     m2.print_matrix();
 
+    print_section("Printing Number of Rows in M1");
+    println!("{}", m1.get_rows());
+
+    print_section("Printing Number of Columns in M1");
+    println!("{}", m1.get_cols());
+
+
 }
 
 fn print_section(title: &str) {
